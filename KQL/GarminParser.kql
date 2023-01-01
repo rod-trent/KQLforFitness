@@ -1,0 +1,17 @@
+// This is a simple parser for Garmin exports. 
+// Most of the Garmin export files (csv) come in 3 columns (Month, Activity, Value).
+// In the following query, the Value is distance.
+// You can choose to import all export files into a single custom table in Log Analytics,
+// but I choose to import each file into its own custom table. i.e. the following query is the Garmin Distance export.
+// Then, I can just use Joins to connect things like heart rate data to activities, VO2, etc.
+// The following query also pulls just Running and Cycling out of the distance data and displays it in a column chart.
+
+Garmin2022Distance_CL
+| extend CSVFields = split(RawData, ',')
+| extend Month = tostring(CSVFields[0])
+| extend Activity = tostring(CSVFields[1])
+| extend Distance = tostring(CSVFields[2])
+| extend todecimal(Distance)
+| where Activity == "Running" or Activity == "Cycling"
+| distinct Month, Activity, Distance
+| render columnchart 

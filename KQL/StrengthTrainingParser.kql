@@ -1,0 +1,13 @@
+//The Strength Training export from Garmin has 4 fields (Month, type, reps, and volume).
+
+
+Garmin2022StrengthTraining_CL
+| extend CSVFields = split(RawData, ',')
+| extend Month = tostring(CSVFields[0])
+| extend Type = tostring(CSVFields[1])
+| extend Reps = tostring(CSVFields[2])
+| extend Volume = tostring(CSVFields[3])
+| extend todecimal(Reps)
+| extend todecimal(Volume)
+| distinct Month, Reps, Volume
+| render columnchart 

@@ -1,0 +1,7 @@
+Garmin
+| extend
+    DurationMin = totimespan(Column7) / 1m,
+    ActivityDate = todatetime(Column2),
+    Week = startofweek(todatetime(Column2))
+| summarize WeeklyMinutes = sum(DurationMin) by Week
+| sort by Week desc

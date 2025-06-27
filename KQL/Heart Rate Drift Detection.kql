@@ -1,0 +1,10 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    DurationMin = totimespan(Column7) / 1m,
+    AvgHR = toint(Column8),
+    MaxHR = toint(Column9)
+| where isnotnull(DurationMin) and DurationMin >= 10 and isnotnull(AvgHR) and isnotnull(MaxHR)
+| extend HRDrift = MaxHR - AvgHR
+| summarize AvgDrift = avg(HRDrift) by ActivityType
+| sort by AvgDrift desc

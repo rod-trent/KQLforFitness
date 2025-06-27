@@ -1,0 +1,6 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    StrideLength = todouble(Column17)
+| where ActivityType == "Running"
+| summarize AvgStride = avg(StrideLength), MinStride = min(StrideLength), MaxStride = max(StrideLength)

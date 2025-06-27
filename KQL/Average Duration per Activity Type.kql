@@ -1,0 +1,4 @@
+Garmin
+| extend ActivityType = Column1, Duration = totimespan(Column7)
+| summarize AvgDurationMin = avg(Duration) / 1m by ActivityType
+| sort by AvgDurationMin desc

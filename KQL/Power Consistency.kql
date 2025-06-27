@@ -1,0 +1,8 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    AvgPower = toint(Column26),
+    MaxPower = toint(Column27)
+| where isnotnull(AvgPower) and isnotnull(MaxPower) and AvgPower > 0
+| extend PowerRatio = round(MaxPower / AvgPower, 2)
+| summarize AvgPowerRatio = avg(PowerRatio) by ActivityType

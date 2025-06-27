@@ -1,0 +1,4 @@
+Garmin
+| extend ActivityType = Column1, MaxHR = toint(Column9)
+| summarize MaxObservedHR = max(MaxHR) by ActivityType
+| sort by MaxObservedHR desc

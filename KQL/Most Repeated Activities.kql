@@ -1,0 +1,4 @@
+Garmin
+| extend Title = Column4
+| summarize Count = count() by Title
+| top 10 by Count desc

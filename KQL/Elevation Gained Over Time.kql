@@ -1,0 +1,6 @@
+Garmin
+| extend
+    Date = startofday(todatetime(Column2)),
+    Ascent = toint(Column15)
+| summarize TotalAscent = sum(Ascent) by Date
+| render timechart

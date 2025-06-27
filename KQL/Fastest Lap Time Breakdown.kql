@@ -1,0 +1,10 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    Title = Column4,
+    BestLapParts = split(Column33, ":")
+| where array_length(BestLapParts) == 3
+| extend
+    BestLapDuration = tolong(BestLapParts[0]) * 3600s + tolong(BestLapParts[1]) * 60s + tolong(BestLapParts[2]) * 1s
+| top 5 by BestLapDuration asc
+| project Title, ActivityType, BestLapDuration

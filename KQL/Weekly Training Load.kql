@@ -3,5 +3,5 @@ Garmin
     ActivityType = Column1,
     Duration = totimespan(Column7),
     ActivityDate = todatetime(Column2)
-| summarize TotalMinutes = sum(Duration)/1m by bin(ActivityDate, 1w), ActivityType
+| summarize TotalMinutes = sum(Duration)/1m by bin(ActivityDate, 7d), ActivityType
 | render timechart

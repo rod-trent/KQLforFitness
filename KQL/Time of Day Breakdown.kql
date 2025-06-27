@@ -1,0 +1,6 @@
+Garmin
+| extend
+    HourOfDay = datetime_part("hour", todatetime(Column2)),
+    ActivityType = Column1
+| summarize Count = count() by HourOfDay, ActivityType
+| sort by HourOfDay asc

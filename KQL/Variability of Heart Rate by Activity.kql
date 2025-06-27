@@ -1,0 +1,6 @@
+Garmin
+| extend ActivityType = Column1, AvgHR = toint(Column8), MaxHR = toint(Column9)
+| where isnotnull(AvgHR) and isnotnull(MaxHR)
+| extend HRRange = MaxHR - AvgHR
+| summarize AvgHRVariance = avg(HRRange) by ActivityType
+| sort by AvgHRVariance desc

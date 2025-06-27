@@ -1,0 +1,20 @@
+Garmin
+| extend
+    AvgHR = toint(Column8),
+    MinTempRaw = tostring(Column31),
+    MaxTempRaw = tostring(Column34)
+| where MinTempRaw !in ("", "--") and MaxTempRaw !in ("", "--") and isnotempty(AvgHR)
+| extend
+    MinTemp = todouble(MinTempRaw),
+    MaxTemp = todouble(MaxTempRaw)
+| extend
+    TempRange = (MinTemp + MaxTemp) / 2
+| extend
+    TempBand = case(
+        TempRange < 40, "❄️ Cold (<40°F)",
+        TempRange < 60, "🌬️ Cool (40–59°F)",
+        TempRange < 75, "🌤️ Moderate (60–74°F)",
+        TempRange < 90, "🌞 Warm (75–89°F)",
+        "🔥 Hot (90°F+)")
+| summarize AvgHeartRate = avg(AvgHR), SessionCount = count() by TempBand
+| sort by TempBand

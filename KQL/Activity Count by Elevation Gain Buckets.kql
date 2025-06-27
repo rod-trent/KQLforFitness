@@ -1,0 +1,9 @@
+Garmin
+| extend Ascent = toint(Column15)
+| summarize Count = count() by ElevationBucket = case(
+    Ascent < 10, "Flat",
+    Ascent < 30, "Gentle",
+    Ascent < 100, "Hilly",
+    "Mountainous"
+)
+| sort by Count desc

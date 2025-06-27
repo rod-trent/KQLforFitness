@@ -1,0 +1,8 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    AvgHR = toint(Column8),
+    AvgSpeedKph = todouble(Column13)
+| where ActivityType == "Running"
+| project AvgHR, Pace = 60 / AvgSpeedKph
+| summarize AvgPaceMinPerKm = avg(Pace), AvgHR = avg(AvgHR)

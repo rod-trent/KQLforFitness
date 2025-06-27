@@ -1,0 +1,5 @@
+Garmin
+| extend ActivityDate = todatetime(Column2), MaxPower = toint(Column27), Title = Column4
+| where isnotnull(MaxPower)
+| top 5 by MaxPower desc
+| project ActivityDate, Title, MaxPower

@@ -1,0 +1,9 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    Reps = toint(Column29),
+    Sets = toint(Column30),
+    WeekStart = startofweek(todatetime(Column2))
+| where ActivityType == "Strength Training" and isnotnull(Reps) and isnotnull(Sets)
+| summarize TotalReps = sum(Reps), TotalSets = sum(Sets) by WeekStart
+| sort by WeekStart desc

@@ -1,0 +1,4 @@
+Garmin
+| extend ActivityDate = format_datetime(todatetime(Column2), "yyyy-MM-dd")
+| summarize Activities = make_list(Column1) by ActivityDate
+| where array_length(Activities) > 1

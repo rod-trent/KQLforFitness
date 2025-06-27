@@ -1,0 +1,7 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    MinTemp = todouble(Column31),
+    MaxTemp = todouble(Column34)
+| where MaxTemp >= 90 or MinTemp <= 40
+| project ActivityType, Column2, MinTemp, MaxTemp

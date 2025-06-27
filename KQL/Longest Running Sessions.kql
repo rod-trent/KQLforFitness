@@ -1,0 +1,5 @@
+Garmin
+| extend ActivityType = Column1, DurationMin = totimespan(Column7) / 1m, Title = Column4
+| where ActivityType == "Running"
+| top 5 by DurationMin desc
+| project Title, DurationMin

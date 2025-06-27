@@ -2,7 +2,7 @@
 
 KQL queries for Garmin data exports. You can import the Garmin .csv to either https://aka.ms/KustoFree or Log Analytics in Azure.
 
-There's already a bunch of KQL queries in the KQL folder. 
+There's already a bunch of KQL queries in the [KQL](https://github.com/rod-trent/GarminKQL/tree/main/KQL) folder. 
 
 Think of something that doesn't already exist in the folder, make a request and I'll work on it.
 

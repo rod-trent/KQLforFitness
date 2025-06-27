@@ -1,0 +1,12 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    AerobicTE = todouble(Column10)
+| summarize Count = count() by IntensityZone = case(
+    AerobicTE < 1, "Recovery",
+    AerobicTE < 2, "Light",
+    AerobicTE < 3, "Moderate",
+    AerobicTE < 4, "Hard",
+    "Very Hard"
+)
+| sort by Count desc

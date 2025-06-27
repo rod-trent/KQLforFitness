@@ -1,0 +1,7 @@
+Garmin
+| extend
+    Date = startofday(todatetime(Column2)),
+    AvgPower = toint(Column26)
+| where isnotempty(AvgPower) and AvgPower > 0
+| summarize AvgPowerOutput = avg(AvgPower) by Date
+| render timechart

@@ -1,0 +1,8 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    ContactTime = toint(Column20),
+    ActivityDate = todatetime(Column2)
+| where ActivityType == "Running" and isnotnull(ContactTime)
+| summarize AvgContactTime = avg(ContactTime) by bin(ActivityDate, 1d)
+| render timechart

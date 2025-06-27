@@ -1,0 +1,7 @@
+Garmin
+| extend
+    ActivityType = Column1,
+    DurationMin = totimespan(Column7)/1m,
+    AvgHR = toint(Column8)
+| summarize AvgHR = avg(AvgHR), TotalMinutes = sum(DurationMin) by ActivityType
+| sort by AvgHR desc

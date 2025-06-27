@@ -1,0 +1,4 @@
+Garmin
+| extend ActivityType = Column1
+| summarize Count = count() by ActivityType
+| sort by Count desc
